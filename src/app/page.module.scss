@@ -1,0 +1,21 @@
+.layout {
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: 150px 1fr 100px;
+    grid-template-areas:
+        'header'
+        'content'
+        'footer';
+
+    padding: 0 10%;
+}
+
+.header {
+    grid-area: header;
+}
+.content {
+    grid-area: content;
+}
+.footer {
+    grid-area: footer;
+}
