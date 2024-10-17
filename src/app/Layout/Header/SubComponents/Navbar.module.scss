@@ -1,0 +1,77 @@
+@import '@/variables.scss';
+
+.nav {
+    $button-height: 2.5rem;
+    $button-width: 5rem;
+    $button-border-radius: 4px;
+    $active-color: #1cb9ed;
+    $nav-gap: 7px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: $nav-gap;
+    justify-content: right;
+    height: 5rem;
+    max-width: calc(5 * $button-width + 4 * $nav-gap); // 5 buttons width + 4 gaps
+
+    button {
+        height: $button-height;
+        width: $button-width;
+        border: 2px solid #000;
+        border-radius: $button-border-radius;
+        background-color: #fff;
+        font-size: 0.7rem;
+        padding: 2px 4px;
+
+        display: flex;
+        justify-content: space-between;
+
+        box-shadow: 1px 1px 0 #000;
+
+        cursor: pointer;
+        svg {
+            font-size: 28px;
+            font-weight: bolder;
+            stroke-width: 3px;
+
+            align-self: center;
+        }
+
+        p {
+            align-self: flex-end;
+        }
+
+        &.active {
+            color: $active-color;
+            border-color: $active-color;
+            box-shadow: 1px 1px 0 $active-color;
+        }
+
+        &.black {
+            color: #fff;
+            background-color: #000;
+        }
+
+        // ------------- ADJUSTMENT FOR LAST BUTTONS ------------ //
+        // ----------------- SIGNUP AND FEEDBACK ---------------- //
+
+        &:nth-last-of-type(1),
+        &:nth-last-of-type(2) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            p {
+                align-self: center;
+            }
+        }
+    }
+}
+
+// ------------- RESPONSIVINESS MEDIA QUERY ------------- //
+
+@media (max-width: $tablet-width-breakpoint) {
+    .nav {
+        display: none;
+    }
+}

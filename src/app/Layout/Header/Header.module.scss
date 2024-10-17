@@ -20,36 +20,4 @@
             font-size: 0.8rem;
         }
     }
-    .nav {
-        $button-height: 2rem;
-        $button-width: 4rem;
-        $button-border-radius: 4px;
-        $active-color: #1cb9ed;
-
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0 7px;
-        justify-content: right;
-        height: 5rem;
-        max-width: calc(5 * 4rem + 4 * 7px); // 5 buttons width + 4 gaps
-
-        button {
-            height: $button-height;
-            width: $button-width;
-            border: 2px solid #000;
-            border-radius: $button-border-radius;
-            background-color: #fff;
-            font-size: 0.7rem;
-
-            &.active {
-                color: $active-color;
-                border-color: $active-color;
-            }
-
-            &.black {
-                color: #fff;
-                background-color: #000;
-            }
-        }
-    }
 }
