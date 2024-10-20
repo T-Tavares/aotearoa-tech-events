@@ -16,7 +16,8 @@ const Card: React.FC<{event: Event}> = ({event}) => {
     const openToggleCSS = isOpen ? ss.open : ss.close;
 
     return (
-        <div className={`${ss.card} ${openToggleCSS}`}>
+        <div className={`${ss.card}`}>
+            <h1 className={ss.day}>12</h1>
             <p className={ss.date}>{date}</p>
             <p className={ss.title}>{title}</p>
             <p className={ss.organiser}>by {organiserDetails}</p>
@@ -30,12 +31,18 @@ const Card: React.FC<{event: Event}> = ({event}) => {
                     </p>
                 )}
             </div>
-            <div className={ss.typeAndLink}>
-                <p className={ss.type}>{type}</p>
-                <a href={ticketLink} className={ss.link}>
-                    <p>Link</p>
-                    <FaArrowUp />
-                </a>
+
+            <div className={ss.imageLinkAndType}>
+                <div className={ss.image}>
+                    <FaImage />
+                </div>
+                <div className={ss.typeAndLink}>
+                    <p className={ss.type}>{type}</p>
+                    <a href={ticketLink} className={ss.link}>
+                        <p>Link</p>
+                        <FaArrowUp />
+                    </a>
+                </div>
             </div>
             <div className={ss.descriptionContainer}>
                 <div className={ss.header} onClick={toggleDescription}>
@@ -48,10 +55,6 @@ const Card: React.FC<{event: Event}> = ({event}) => {
                     <p>{blurb}</p>
                 </div>
             </div>
-            <div className={ss.eventImage}>
-                <FaImage />
-            </div>
-            {/* <img src="" alt="" className={ss.eventImage} /> */}
         </div>
     );
 };
