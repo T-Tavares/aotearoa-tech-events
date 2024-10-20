@@ -1,7 +1,7 @@
 import ss from '../PageLayout.module.scss';
-import Header from '../../LayoutComponents/Header/Header';
-import EventsCards from '../../Components/EventsCards/EventsCards';
+import Header from '@/LayoutComponents/Header/v1/Header';
 import Footer from '@/LayoutComponents/Footer/Footer';
+import Content from '@/LayoutComponents/Content/v2/Content';
 
 const Version: React.FC = () => {
     return (
@@ -10,7 +10,7 @@ const Version: React.FC = () => {
                 <Header />
             </div>
             <div className={ss.content}>
-                <EventsCards />
+                <Content />
             </div>
             <div className={ss.footer}>
                 <Footer />

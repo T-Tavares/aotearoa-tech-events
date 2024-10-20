@@ -1,0 +1,70 @@
+@import '@/variables.scss';
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $nav-gap;
+    justify-content: right;
+    height: 5rem;
+    max-width: calc(5 * $button-width + 4 * $nav-gap); // 5 buttons width + 4 gaps
+
+    button {
+        height: $button-height;
+        width: $button-width;
+        border: none;
+        border-radius: $button-border-radius;
+        background-color: #fff;
+        font-size: 0.7rem;
+        padding: 5px 12px;
+
+        display: flex;
+        justify-content: space-between;
+
+        box-shadow: 3px 5px 5px #ddd, 0px 0px 5px #ddd;
+
+        cursor: pointer;
+        svg {
+            font-size: 28px;
+            font-weight: bolder;
+            stroke-width: 3px;
+
+            align-self: center;
+        }
+
+        p {
+            align-self: flex-end;
+        }
+
+        &.active {
+            color: $active-color;
+            border: 1px solid $active-color;
+            box-shadow: 3px 5px 5px #ddd, 0px 0px 5px #ddd;
+        }
+
+        &.black {
+            color: #fff;
+            background-color: #000;
+        }
+
+        // ------------- ADJUSTMENT FOR LAST BUTTONS ------------ //
+        // ----------------- SIGNUP AND FEEDBACK ---------------- //
+
+        &:nth-last-of-type(1) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            p {
+                align-self: center;
+            }
+        }
+    }
+}
+
+// ------------- RESPONSIVINESS MEDIA QUERY ------------- //
+
+@media (max-width: $tablet-width-breakpoint) {
+    .nav {
+        display: none;
+    }
+}

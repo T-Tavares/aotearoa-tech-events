@@ -1,0 +1,103 @@
+@import '@/variables.scss';
+
+// ------------------ BURGUER MENU BTN ------------------ //
+
+.openBtn {
+    position: relative;
+    right: -30px;
+
+    svg {
+        font-size: 30px;
+    }
+}
+
+// ----------- NAV MOBILE STYLE AND TRANSITION ---------- //
+
+.navContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+
+    background-color: #fff;
+
+    z-index: 6;
+
+    .closeBtn {
+        text-align: right;
+        padding: 10px;
+        svg {
+            font-size: 40px;
+        }
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+
+        button {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            border: none;
+            background-color: #fff;
+            font-size: 16px;
+
+            svg {
+                font-size: 23px;
+            }
+
+            &.black {
+                color: #fff;
+                background-color: #000;
+            }
+            &.active {
+                color: #fff;
+                background-color: #1cb9ed;
+            }
+        }
+    }
+
+    &.open {
+        height: calc(6 * 50px + 64px);
+        transition: height 500ms 200ms;
+    }
+    &.close {
+        height: 0px;
+        transition: height 500ms;
+    }
+}
+
+// ------------ BACKDROP STYLE AND TRANSITION ----------- //
+
+.backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #00000050;
+    backdrop-filter: blur(5px);
+    z-index: 5;
+
+    &.open {
+        opacity: 1;
+        transition: opacity 300ms;
+    }
+    &.close {
+        opacity: 0;
+        transition: opacity 400ms;
+        pointer-events: none;
+    }
+}
+
+// ------------- RESPONSIVINESS MEDIA QUERY ------------- //
+
+@media (min-width: $tablet-width-breakpoint) {
+    .openBtn {
+        display: none;
+    }
+}

@@ -1,3 +1,29 @@
+// ------------------------------------------------------ //
+// ----------------------- IMPORTS ---------------------- //
+// ------------------------------------------------------ //
+
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Trad:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+// -------------------- SCREEN SIZING ------------------- //
+
 $mobile-width-breakpoint: 320px;
 $tablet-width-breakpoint: 768px;
 $desktop-width-breakpoint: 1024px;
+
+// ------------------ COLOURS AND FONTS ----------------- //
+
+$active-color: #1cb9ed;
+$oleo-script: 'Oleo Script', system-ui; // regular 400 or bold 700
+$poetsen-one: 'Poetsen One', system-ui; // regular 400
+$playwrite-us-trad: 'Playwrite US Trad', system-ui; // 100 to 400
+$open-sans: 'Open Sans', system-ui; // 300 to 800
+
+// ------------------ NAVBAR VARIABLES ------------------ //
+
+$nav-gap: 15px;
+$button-height: 2.5rem;
+$button-width: 6rem;
+$button-border-radius: 20px;

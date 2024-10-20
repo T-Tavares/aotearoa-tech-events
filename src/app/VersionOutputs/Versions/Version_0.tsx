@@ -1,6 +1,6 @@
 import ss from '../PageLayout.module.scss';
-import Header from '../../LayoutComponents/Header/Header';
-import EventsCards from '../../Components/EventsCards/EventsCards';
+import Header from '@/LayoutComponents/Header/v0/Header';
+import EventsCards from '@/Components/EventsCards/v1/EventsCards';
 import Footer from '@/LayoutComponents/Footer/Footer';
 
 const Version: React.FC = () => {

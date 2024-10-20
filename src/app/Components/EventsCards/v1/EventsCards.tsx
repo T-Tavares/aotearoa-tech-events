@@ -2,10 +2,10 @@
 
 import ss from './EventsCards.module.scss';
 import {useState, useEffect} from 'react';
-import type {Event} from '../../Types/Types';
+import type {Event} from '@/Types/Types';
 
-import Card from '../Card/Card2';
-import Loading from '../Loading/Loading';
+import Card from '@/components/Card/v2/Card';
+import Loading from '@/components/Loading/Loading';
 import Papa from 'papaparse';
 
 const EventsCards: React.FC = () => {

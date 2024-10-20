@@ -1,0 +1,174 @@
+.card {
+    // ----------------- CARD GENERAL STYLE ----------------- //
+    position: relative;
+
+    height: 350px;
+    width: 240px;
+    margin-bottom: 3rem;
+    border-top: 5px solid #000;
+    &.open {
+        border-bottom: 1px solid #000;
+        transition: border-bottom 50ms 600ms;
+    }
+    &.close {
+        border-bottom: none;
+    }
+
+    // --------------------- CARD HEADER -------------------- //
+
+    /* 
+        Heights on title, organiser and address are a ajdust to give 
+        space to long texts but still give the card layout conscistency
+    */
+
+    .date,
+    .title,
+    .organiser,
+    .address {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    .date {
+        font-weight: bold;
+        border-bottom: 1px solid #000;
+        height: 27px;
+        overflow: hidden;
+    }
+    .title {
+        font-weight: bold;
+        height: 60px;
+    }
+    .organiser {
+        text-align: right;
+        font-size: 12px;
+        height: 35px;
+    }
+    .address {
+        font-size: 14px;
+        height: 40px;
+        overflow: hidden;
+
+        .mapsLink {
+            color: #27a8e0;
+        }
+    }
+
+    // -------------------- TYPE AND LINK ------------------- //
+
+    .typeAndLink {
+        display: flex;
+        gap: 10px;
+        margin: 5px 0;
+
+        .type,
+        .link {
+            padding: 4px;
+            font-size: 12px;
+            font-weight: 100;
+            text-align: center;
+            width: 70px;
+            border-radius: 3px;
+            border: none;
+        }
+        .type {
+            background-color: #000;
+            color: #fff;
+        }
+        .link {
+            background-color: #27a8e0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+
+            p {
+                color: #fff;
+                font-size: 12px;
+                font-weight: 600;
+                text-decoration: underline;
+            }
+
+            svg {
+                color: #fff;
+                font-size: 14px;
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    // --------------------- DESCRIPTION -------------------- //
+    .descriptionContainer {
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            border-bottom: 1px solid #000;
+
+            cursor: pointer;
+
+            .headerTitle {
+                font-size: 14px;
+            }
+            .headerArrow {
+                font-size: 25px;
+                line-height: 0;
+
+                &.open {
+                    transform: rotate(180deg);
+                    transition: transform 0.5s;
+                }
+                &.close {
+                    transform: rotate(0deg);
+                    transition: transform 0.5s;
+                }
+            }
+        }
+        .descriptionText {
+            background-color: #fff;
+            height: 0px;
+            overflow-y: scroll;
+            scrollbar-width: none;
+
+            p {
+                font-size: 14px;
+                line-height: 18px;
+                letter-spacing: 0.5px;
+                text-align: justify;
+            }
+
+            &.open {
+                height: 124px;
+                padding: 10px 0;
+                transition: height 500ms 200ms, padding 500ms;
+            }
+            &.close {
+                height: 0px;
+                transition: height 500ms, padding 500ms 200ms;
+            }
+        }
+    }
+    // ------------------------ IMAGE ----------------------- //
+    .eventImage {
+        position: absolute;
+        bottom: 0;
+        background-color: #000;
+        height: 120px;
+        width: 100%;
+        border-radius: 4px;
+        z-index: 1;
+
+        // --------------- PLACEHOLDER FOR IMAGES --------------- //
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 110px;
+        color: #fff;
+    }
+}

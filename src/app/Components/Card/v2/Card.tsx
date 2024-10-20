@@ -1,5 +1,5 @@
-import ss from './Card2.module.scss';
-import type {Event} from '../../Types/Types';
+import ss from './Card.module.scss';
+import type {Event} from '@/Types/Types';
 
 import {RiArrowDownSLine} from 'react-icons/ri';
 import {FaImage} from 'react-icons/fa6';
