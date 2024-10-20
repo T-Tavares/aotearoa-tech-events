@@ -1,5 +1,5 @@
 import ss from './page.module.scss';
-import Header from './Layout/Header/Header';
+import Header from './LayoutComponents/Header/Header';
 import EventsCards from './Components/EventsCards/EventsCards';
 
 export default function HomeLayout() {
