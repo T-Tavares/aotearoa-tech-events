@@ -1,0 +1,66 @@
+// ---------------- GENERAL FOOTER LAYOUT --------------- //
+
+.footer {
+    background-color: #eee;
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-areas: 'curation subscribe copyright';
+
+    padding: 0 15%;
+    align-items: center;
+    font-size: 14px;
+
+    .curation {
+        grid-area: curation;
+        display: flex;
+        gap: 20px 10px;
+        flex-wrap: wrap;
+
+        .curationTitle {
+            flex: 1 0 100%;
+        }
+    }
+    .subscribe {
+        grid-area: subscribe;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        border: 2px solid #999;
+        border-color: #999 transparent #999 transparent;
+        padding: 20px 0;
+
+        input {
+            padding: 5px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            background-color: transparent;
+            &:focus {
+                border: 2px solid #1cb9ed;
+                outline: none;
+            }
+        }
+
+        button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 300ms;
+
+            &:hover {
+                background-color: #1cb9ed;
+                transition: background-color 300ms;
+            }
+        }
+    }
+    .copyright {
+        grid-area: copyright;
+    }
+}

@@ -1,0 +1,51 @@
+.loadingContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    // prettier-ignore
+    @keyframes spin {
+        0% {transform: rotate(360deg);}
+        100% {transform: rotate(0deg);}
+    }
+
+    .loadingWheel {
+        position: relative;
+
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background: conic-gradient(#000, transparent 70%);
+
+        // ------------------ MIDDLE WHITE MASK ----------------- //
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        // -------------- ROUNDNESS OF LOADING TIP -------------- //
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(50% - 5px);
+
+            z-index: 1;
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            background-color: #000;
+        }
+        animation: spin 2s linear infinite forwards;
+    }
+}

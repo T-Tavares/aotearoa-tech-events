@@ -1,19 +1,19 @@
 .layout {
     height: 100dvh;
     display: grid;
-    grid-template-rows: 150px 1fr 100px;
+    grid-template-rows: 150px 1fr 280px;
     grid-template-areas:
         'header'
         'content'
         'footer';
-
-    padding: 0 15%;
 }
 
 .header {
+    padding: 0 15%;
     grid-area: header;
 }
 .content {
+    padding: 0 15%;
     grid-area: content;
 }
 .footer {
