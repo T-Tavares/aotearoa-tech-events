@@ -1,17 +1,15 @@
 import ss from './Header.module.scss';
 
-import MobileNavbar from './SubComponents/MobileNavbar';
-import Navbar from './SubComponents/Navbar';
+import MobileNavbar from './SubComponents/Navbar/MobileNavbar';
+import Navbar from './SubComponents/Navbar/Navbar';
+import Logo from './SubComponents/Logo/Logo';
+import MobileLogo from './SubComponents/Logo/MobileLogo';
 
 const Header: React.FC = () => {
     return (
         <div className={ss.header}>
-            <div className={ss.logo}>
-                <h1>techstars_</h1>
-                <h1>Startup Digest</h1>
-                <h1>New Zealand</h1>
-                <p>A newsletter covering all startup things in Aotearoa New Zealand</p>
-            </div>
+            <Logo />
+            <MobileLogo />
             <Navbar />
             <MobileNavbar />
         </div>

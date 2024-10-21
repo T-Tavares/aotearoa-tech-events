@@ -1,13 +1,26 @@
 @import '@/variables.scss';
 
 .content {
-    width: 100dvw;
+    position: relative;
 
-    & h1 {
+    width: 100dvw;
+    min-height: calc(100dvh - 170px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vh;
+
+    h1 {
         font-family: $playwrite-us-trad;
         color: $active-color;
-        font-size: 90px;
+        font-size: clamp(40px, 7vw, 65px);
         font-weight: 400;
         text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    @media (max-width: $tablet-width-breakpoint) {
+        margin-top: 2vh;
+        min-height: calc(100dvh - 80px);
     }
 }

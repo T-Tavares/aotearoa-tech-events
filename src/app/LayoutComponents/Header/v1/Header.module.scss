@@ -1,24 +1,8 @@
 .header {
     display: flex;
     justify-content: space-between;
-    height: 100%;
+
     width: 100%;
     padding: 0 3rem;
-    padding-top: 3rem;
-
-    .logo {
-        height: 100%;
-        width: 220px;
-
-        h1 {
-            font-size: 1.4rem;
-            font-weight: bold;
-            &:nth-of-type(3) {
-                color: #1cb9ed;
-            }
-        }
-        p {
-            font-size: 0.8rem;
-        }
-    }
+    padding-top: 1rem;
 }

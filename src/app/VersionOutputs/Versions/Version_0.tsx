@@ -1,4 +1,4 @@
-import ss from '../PageLayout.module.scss';
+import ss from './Version_0.module.scss';
 import Header from '@/LayoutComponents/Header/v0/Header';
 import EventsCards from '@/Components/EventsCards/v1/EventsCards';
 import Footer from '@/LayoutComponents/Footer/Footer';

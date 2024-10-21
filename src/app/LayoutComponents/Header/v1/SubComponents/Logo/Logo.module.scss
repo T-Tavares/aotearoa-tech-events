@@ -1,0 +1,23 @@
+@import '@/variables.scss';
+
+.logo {
+    height: 100%;
+    width: 220px;
+
+    h1 {
+        font-size: 1.4rem;
+        font-weight: bold;
+        &:nth-of-type(3) {
+            color: #1cb9ed;
+        }
+    }
+    p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: $tablet-width-breakpoint) {
+    .logo {
+        display: none;
+    }
+}

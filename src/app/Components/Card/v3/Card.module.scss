@@ -18,11 +18,14 @@
         space to long texts but still give the card layout conscistency
     */
     .day {
+        $top-distance: max(min(-48px, -6vw), -65px);
+
         position: absolute;
-        top: -70px;
-        transform: translate(10%, 0);
+        top: $top-distance;
+        right: min(30px, max(0px, 5vw));
+
         font-family: $poetsen-one;
-        font-size: 200px;
+        font-size: clamp(130px, 16vw, 180px);
         line-height: 0;
         z-index: -1;
         color: $active-color;
@@ -68,7 +71,7 @@
     .descriptionContainer {
         padding-top: 6px;
         position: relative;
-        z-index: 50;
+        z-index: 10;
         background-color: #fff;
         overflow: hidden;
 

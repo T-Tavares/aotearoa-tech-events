@@ -1,4 +1,4 @@
-import ss from '../PageLayout.module.scss';
+import ss from './Version_1.module.scss';
 import Header from '@/LayoutComponents/Header/v1/Header';
 import Footer from '@/LayoutComponents/Footer/Footer';
 import Content from '@/LayoutComponents/Content/v2/Content';

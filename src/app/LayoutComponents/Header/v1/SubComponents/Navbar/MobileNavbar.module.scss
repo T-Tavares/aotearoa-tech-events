@@ -22,7 +22,7 @@
 
     background-color: #fff;
 
-    z-index: 6;
+    z-index: 31;
 
     .closeBtn {
         text-align: right;
@@ -62,7 +62,7 @@
     }
 
     &.open {
-        height: calc(6 * 50px + 64px);
+        height: calc(5 * 50px + 64px);
         transition: height 500ms 200ms;
     }
     &.close {
@@ -81,7 +81,7 @@
     left: 0;
     background-color: #00000050;
     backdrop-filter: blur(5px);
-    z-index: 5;
+    z-index: 30;
 
     &.open {
         opacity: 1;

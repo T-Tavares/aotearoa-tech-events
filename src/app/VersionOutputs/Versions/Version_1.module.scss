@@ -1,0 +1,19 @@
+.layout {
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: minmax(1fr, 150px) 1fr minmax(280px, 100%);
+    grid-template-areas:
+        'header'
+        'content'
+        'footer';
+}
+
+.header {
+    grid-area: header;
+}
+.content {
+    grid-area: content;
+}
+.footer {
+    grid-area: footer;
+}

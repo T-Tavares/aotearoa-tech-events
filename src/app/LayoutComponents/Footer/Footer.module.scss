@@ -4,13 +4,19 @@
     background-color: #eee;
     height: 100%;
     width: 100%;
-
     display: grid;
     gap: 30px;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-areas: 'curation subscribe copyright';
 
-    padding: 0 15%;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'curation'
+            'subscribe'
+            'copyright';
+    }
+    padding: 30px 15%;
     align-items: center;
     font-size: 14px;
 
