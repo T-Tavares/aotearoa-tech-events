@@ -1,8 +1,33 @@
+@import '@/variables.scss';
+
+.month {
+    cursor: text;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+
+    p {
+        font-family: $poetsen-one;
+        font-size: 30px;
+        border-bottom: 2px solid #000;
+        padding: 5px 10px;
+    }
+
+    svg {
+        margin-top: 10px;
+        font-size: 30px;
+    }
+}
+
 .eventsCardsContainer {
     height: 100%;
     // background: linear-gradient(90deg, #fff, #000);
-    width: 300%;
-    overflow: scroll;
+    user-select: none;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    cursor: grab;
+
     margin-top: 5rem;
     display: flex;
 
