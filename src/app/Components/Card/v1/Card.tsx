@@ -1,5 +1,5 @@
 import ss from './Card.module.scss';
-import type {Event} from '../../Types/Types';
+import type {Event} from '@/Types/Types';
 
 const Card: React.FC<{event: Event}> = ({event}) => {
     console.log(event);
