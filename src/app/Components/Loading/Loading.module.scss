@@ -2,6 +2,7 @@
     height: 100%;
     width: 100%;
     display: flex;
+    flex-direction: column;
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -11,41 +12,48 @@
         0% {transform: rotate(360deg);}
         100% {transform: rotate(0deg);}
     }
+    .message {
+    }
+    .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        .loadingWheel {
+            position: relative;
 
-    .loadingWheel {
-        position: relative;
-
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        background: conic-gradient(#000, transparent 70%);
-
-        // ------------------ MIDDLE WHITE MASK ----------------- //
-        &::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-            height: 35px;
-            width: 35px;
+            height: 50px;
+            width: 50px;
             border-radius: 50%;
-            background-color: #fff;
-        }
-        // -------------- ROUNDNESS OF LOADING TIP -------------- //
-        &::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: calc(50% - 5px);
+            background: conic-gradient(#000, transparent 70%);
 
-            z-index: 1;
-            height: 8px;
-            width: 8px;
-            border-radius: 50%;
-            background-color: #000;
+            // ------------------ MIDDLE WHITE MASK ----------------- //
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                height: 35px;
+                width: 35px;
+                border-radius: 50%;
+                background-color: #fff;
+            }
+            // -------------- ROUNDNESS OF LOADING TIP -------------- //
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: calc(50% - 5px);
+
+                z-index: 1;
+                height: 8px;
+                width: 8px;
+                border-radius: 50%;
+                background-color: #000;
+            }
+            animation: spin 2s linear infinite forwards;
         }
-        animation: spin 2s linear infinite forwards;
     }
 }
