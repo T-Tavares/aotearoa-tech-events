@@ -1,6 +1,8 @@
 import ss from './Card.module.scss';
 import type {Event} from '@/Types/Types';
 
+import {OleoScript, PoetsenOne} from '@/Fonts/fonts';
+
 import {RiArrowDownSLine} from 'react-icons/ri';
 import {FaImage} from 'react-icons/fa6';
 import {FaArrowUp} from 'react-icons/fa';
@@ -17,9 +19,9 @@ const Card: React.FC<{event: Event}> = ({event}) => {
 
     return (
         <div className={`${ss.card}`}>
-            <h1 className={ss.day}>12</h1>
+            <h1 className={`${ss.day} ${PoetsenOne.className}`}>12</h1>
             <p className={ss.date}>{date}</p>
-            <p className={ss.title}>{title}</p>
+            <p className={`${ss.title} ${OleoScript.className}`}>{title}</p>
             <p className={ss.organiser}>by {organiserDetails}</p>
             <div className={ss.address}>
                 {venue.trim() === 'Online' ? (

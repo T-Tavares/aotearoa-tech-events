@@ -11,7 +11,7 @@ import {IoArrowBackCircleSharp, IoArrowForwardCircleSharp} from 'react-icons/io5
 import Card from '@/components/Card/v3/Card';
 import Loading from '@/components/Loading/Loading';
 import Filter from '@/Components/Filter/Filter';
-
+import {PoetsenOne} from '@/fonts';
 interface ScrollCoordinates {
     prevPosition: number;
     currPosition: number;
@@ -91,7 +91,7 @@ const EventsCards: React.FC = () => {
             <Filter />
             <div className={ss.month}>
                 <MdKeyboardArrowLeft />
-                <p>October</p>
+                <p className={PoetsenOne.className}>October</p>
                 <MdKeyboardArrowRight />
             </div>
 

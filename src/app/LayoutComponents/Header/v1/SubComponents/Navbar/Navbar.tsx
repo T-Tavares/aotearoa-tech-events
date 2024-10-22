@@ -3,23 +3,25 @@ import ss from './Navbar.module.scss';
 import {FaRegCalendarDays, FaRss} from 'react-icons/fa6';
 import {LuLogIn} from 'react-icons/lu';
 
+import {OpenSans} from '@/fonts';
+
 const Navbar: React.FC = () => {
     return (
-        <nav className={ss.nav}>
+        <nav className={`${ss.nav} `}>
             <button>
                 <FaRss />
-                <p>News</p>
+                <p className={OpenSans.className}>News</p>
             </button>
             <button className={ss.active}>
                 <FaRegCalendarDays />
-                <p>Events</p>
+                <p className={OpenSans.className}>Events</p>
             </button>
             <button>
                 <LuLogIn />
-                <p>Login</p>
+                <p className={OpenSans.className}>Login</p>
             </button>
             <button className={ss.black}>
-                <p>Sign up</p>
+                <p className={OpenSans.className}>Sign up</p>
             </button>
         </nav>
     );

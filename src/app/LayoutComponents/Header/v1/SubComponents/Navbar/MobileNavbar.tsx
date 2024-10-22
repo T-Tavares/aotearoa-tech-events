@@ -8,6 +8,8 @@ import {IoClose} from 'react-icons/io5';
 import {FaRegCalendarDays, FaRss} from 'react-icons/fa6';
 import {LuLogIn} from 'react-icons/lu';
 
+import {OpenSans} from '@/fonts';
+
 const MobileNavbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -25,18 +27,18 @@ const MobileNavbar: React.FC = () => {
                 <nav>
                     <button>
                         <FaRss />
-                        <p>News</p>
+                        <p className={OpenSans.className}>News</p>
                     </button>
                     <button className={ss.active}>
                         <FaRegCalendarDays />
-                        <p>Events</p>
+                        <p className={OpenSans.className}>Events</p>
                     </button>
                     <button>
                         <LuLogIn />
-                        <p>Login</p>
+                        <p className={OpenSans.className}>Login</p>
                     </button>
                     <button className={ss.black}>
-                        <p>Sign up</p>
+                        <p className={OpenSans.className}>Sign up</p>
                     </button>
                 </nav>
             </div>

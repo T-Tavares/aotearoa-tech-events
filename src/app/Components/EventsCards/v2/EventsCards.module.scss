@@ -6,12 +6,10 @@
     cursor: text;
     display: flex;
     justify-content: center;
-
     margin-top: 4rem;
     margin-bottom: 2rem;
 
     p {
-        font-family: $poetsen-one;
         font-size: $font-size;
         border-bottom: 2px solid #000;
         padding: 5px 10px;
@@ -76,8 +74,6 @@
     }
     .eventsCardsContainer {
         position: relative;
-
-        // scroll-behavior: smooth;
 
         user-select: none;
         overflow-x: scroll;

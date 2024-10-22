@@ -4,16 +4,17 @@
     position: relative;
     height: 100%;
     top: -5px;
+
     h1 {
-        margin-left: 2.5rem;
-        font-size: 1.2rem;
+        margin-left: 3.5rem;
+        font-size: 1.3rem;
         font-weight: bold;
+        line-height: 1.3rem;
 
         &:nth-of-type(1) {
             position: absolute;
-
-            left: -4.2rem;
-
+            left: -4.8rem;
+            top: -2px;
             font-size: 3rem;
             line-height: 3rem;
 
@@ -23,10 +24,7 @@
     p {
         font-size: 0.8rem;
     }
-}
-
-@media (min-width: $tablet-width-breakpoint) {
-    .logo {
+    @media (min-width: $tablet-width-breakpoint) {
         display: none;
     }
 }
