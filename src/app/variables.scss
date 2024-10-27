@@ -11,29 +11,13 @@
 
 // -------------------- SCREEN SIZING ------------------- //
 
-$mobile-width-breakpoint: 320px;
-$tablet-width-breakpoint: 768px;
+$mobile-width-breakpoint: 431px; // 320px
+$tablet-width-breakpoint: 769px; // 768px
 $desktop-width-breakpoint: 1024px;
 
 // ------------------ COLOURS AND FONTS ----------------- //
 
 $active-color: #1cb9ed;
-
-// $oleo-script: 'Oleo Script', system-ui; // regular 400 or bold 700
-// $poetsen-one: 'Poetsen One', system-ui; // regular 400
-// $playwrite-us-trad: 'Playwrite US Trad', system-ui; // 100 to 400
-// $open-sans: 'Open Sans', system-ui; // 300 to 800
-$oleo-script: var(--oleo-script); // regular 400 or bold 700
-$poetsen-one: var(--poetsen-one); // regular 400
-$playwrite-us-trad: var(--playwrite-ud-trad); // 100 to 400
-$open-sans: var(--open-sans); // 300 to 800
-
-// INSTEAD ARE NOW
-
-// var(--oleo-script)
-// var(--poetsen-one)
-// var(--playwrite-ud-trad)
-// var(--open-sans)
 
 // ------------------ NAVBAR VARIABLES ------------------ //
 

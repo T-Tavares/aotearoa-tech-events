@@ -1,5 +1,8 @@
 export interface Event {
-    date: string;
+    startDate: number;
+    endDate?: number;
+    startTime?: number;
+    endTime?: number;
     region: string;
     title: string;
     blurb: string;

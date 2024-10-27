@@ -1,0 +1,61 @@
+@import '@/variables.scss';
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: end;
+    width: 100%;
+    height: 100%;
+    padding: 10px 60px;
+
+    .logo {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+
+        h1 {
+            font-size: 65px;
+            color: $active-color;
+            line-height: 40px; // Compensation for font white area (top and bottom)
+            letter-spacing: -5px;
+        }
+        div {
+            h2 {
+                font-size: 35px;
+                line-height: 22px; // Compensation for font white area (top and bottom)
+                letter-spacing: -2px;
+
+                &:first-of-type {
+                    color: transparent;
+                    background: linear-gradient(#9b9b9b, #333);
+                    background-clip: text;
+                }
+            }
+        }
+    }
+    p {
+        font-size: 9px;
+        color: #aaa;
+    }
+
+    @media (max-width: $mobile-width-breakpoint) {
+        padding: 0 30px;
+
+        .logo {
+            h1 {
+                font-size: 40px;
+                line-height: 30px; // Compensation for font white area (top and bottom)
+            }
+            div {
+                h2 {
+                    font-size: 20px;
+                    line-height: 14px; // Compensation for font white area (top and bottom)
+                }
+            }
+        }
+        p {
+            display: none;
+        }
+    }
+}

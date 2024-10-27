@@ -1,0 +1,46 @@
+@import '@/variables.scss';
+
+.layout {
+    // ------------------- DESKTOP LAYOUT ------------------- //
+
+    $header-height: 120px;
+    $footer-height: 390px;
+
+    min-height: calc(100dvh + $footer-height);
+
+    display: grid;
+    grid-template-rows: $header-height 1fr $footer-height;
+    grid-template-areas:
+        'header'
+        'content'
+        'footer';
+
+    // ----------- HANDLING TABLET RESPONSIVINESS ----------- //
+
+    // @media (max-width: $tablet-width-breakpoint) {
+    // }
+
+    // ----------- HANDLING MOBILE RESPONSIVINESS ----------- //
+
+    @media (max-width: $mobile-width-breakpoint) {
+        $header-height: 60px;
+        $footer-height: 850px;
+
+        min-height: calc(100dvh + $footer-height);
+        grid-template-rows: $header-height min(1fr) $footer-height;
+    }
+}
+
+// ------------------------------------------------------ //
+// ------------- GRID TEMPLATE AREA POINTERS ------------ //
+// ------------------------------------------------------ //
+
+.header {
+    grid-area: header;
+}
+.content {
+    grid-area: content;
+}
+.footer {
+    grid-area: footer;
+}

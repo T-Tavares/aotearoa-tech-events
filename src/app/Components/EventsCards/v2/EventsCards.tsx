@@ -2,16 +2,19 @@
 
 import ss from './EventsCards.module.scss';
 import {useState, useEffect, useRef} from 'react';
-import type {Event} from '@/Types/Types';
-import {dataFetch} from './DataFetch';
 
 import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from 'react-icons/md';
 import {IoArrowBackCircleSharp, IoArrowForwardCircleSharp} from 'react-icons/io5';
 
+import type {Event} from '@/Types/Types';
 import Card from '@/components/Card/v3/Card';
 import Loading from '@/components/Loading/Loading';
 import Filter from '@/Components/Filter/Filter';
+import {dataFetch} from './DataFetch';
 import {PoetsenOne} from '@/fonts';
+
+import {getTodaysDateMS} from '@/Functions/dateHelpers';
+
 interface ScrollCoordinates {
     prevPosition: number;
     currPosition: number;
@@ -19,8 +22,12 @@ interface ScrollCoordinates {
 }
 
 const EventsCards: React.FC = () => {
+    // ------------- DATABASE AND LOADING STATES ------------ //
+
     const [database, setDatabase] = useState<Event[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+
+    // -------------- SWIPPING SCROLLING STATES ------------- //
 
     const cardContainerRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -29,6 +36,9 @@ const EventsCards: React.FC = () => {
         currPosition: 0,
         offset: 0,
     });
+
+    // ------ SWIPING - SCROLLING CARDS LOGIC AND STATE ----- //
+    // ------------------ SWIPING HANDLERS ------------------ //
 
     const handleMouseDown = (e: React.MouseEvent) => {
         setIsDragging(true);
@@ -61,13 +71,16 @@ const EventsCards: React.FC = () => {
         cardContainerRef.current!.style.cursor = 'grab';
     };
 
+    // --------- SWIPING - SCROLLING useEffect LOGIC -------- //
+
     useEffect(() => {
         if (!isDragging) return;
         const clientOnePercent = window.innerWidth / 100;
         const scrollStep = scrollCoordinates.offset > 0 ? clientOnePercent : -clientOnePercent;
         cardContainerRef.current!.scrollLeft += scrollStep;
     }, [scrollCoordinates, isDragging]);
-    // ------------------------------------------------------ //
+
+    // -------- CLICKING - SCROLLING EFFECT TRIGGERS -------- //
 
     const clickScrollLeft = () => {
         cardContainerRef.current!.style.scrollBehavior = 'smooth';
@@ -80,9 +93,19 @@ const EventsCards: React.FC = () => {
         setTimeout(() => (cardContainerRef.current!.style.scrollBehavior = 'unset'), 500);
     };
 
+    // ------------------------------------------------------ //
+    // ------------- DATABASE FETCHING useEffect ------------ //
+    // ------------------------------------------------------ //
+
     useEffect(() => {
         dataFetch({setDatabase, setLoading});
     }, []);
+
+    useEffect(() => {}, [database]);
+
+    // ------------------------------------------------------ //
+    // ----------------- COMPONENT RENDERING ---------------- //
+    // ------------------------------------------------------ //
 
     if (loading) return <Loading message="We are searching for the Best Events, this wont take long" />;
 
@@ -104,9 +127,20 @@ const EventsCards: React.FC = () => {
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseLeave}
                 >
-                    {database.map(event => (
-                        <Card event={event} key={event.title} />
-                    ))}
+                    {database &&
+                        database.map((event, i, arr) => {
+                            const isEventActive = event.startDate > getTodaysDateMS();
+                            const isNextEventActive = arr[i + 1]?.startDate > getTodaysDateMS();
+                            const timeForDivisor = !isEventActive && isNextEventActive;
+                            console.log('timeForDivisor', timeForDivisor);
+
+                            return (
+                                <>
+                                    <Card event={event} key={event.title} />
+                                    {timeForDivisor && <div className={ss.divisor}></div>}
+                                </>
+                            );
+                        })}
                 </div>
                 <div className={ss.scrollArrows}>
                     <IoArrowBackCircleSharp onClick={clickScrollLeft} />

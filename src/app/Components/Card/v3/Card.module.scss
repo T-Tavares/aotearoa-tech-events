@@ -1,195 +1,239 @@
 @import '@/variables.scss';
-
-.card {
-    // ----------------- CARD GENERAL STYLE ----------------- //
+.cardContainer {
     position: relative;
-    margin-top: 130px;
-    height: 350px;
-    min-width: 240px;
-    margin-bottom: 3rem;
-    border-top: 3px solid #000;
-    box-shadow: 3px 3px 5px 0px #bbbb, 0px 0px 3px 0px #bbbbbb20;
-    background-color: #fff;
-
-    // --------------------- CARD HEADER -------------------- //
-    /* 
-        Heights on title, organiser and address are a ajdust to give 
-        space to long texts but still give the card layout conscistency
-    */
     .day {
-        $top-distance: max(min(-48px, -6vw), -65px);
-
-        position: absolute;
-        top: $top-distance;
-        right: min(30px, max(0px, 5vw));
-
+        position: relative;
+        top: clamp(22px, 2.5vw, 28px);
+        right: 0;
+        line-height: clamp(130px, 16vw, 180px);
         font-size: clamp(130px, 16vw, 180px);
-        line-height: 0;
-        z-index: -1;
         color: $active-color;
     }
-    .date,
-    .title,
-    .organiser,
-    .address {
-        font-size: 14px;
-        padding: 5px;
-    }
 
-    .date {
-        font-size: 12px;
-        height: 25px;
-        border-bottom: 1px solid #000;
-        overflow: hidden;
-    }
-    .title {
-        // font-family: $oleo-script;
-        // font-family: var(--oleo-script);
-        font-size: 24px;
-        line-height: 24px;
-        height: 70px;
-    }
-    .organiser {
-        padding-top: 15px;
-        text-align: right;
-        line-height: 12px;
-        font-size: 12px;
-        height: 35px;
-    }
-    .address {
-        font-size: 14px;
-        height: 40px;
-        overflow: hidden;
-
-        .mapsLink {
-            color: #27a8e0;
-        }
-    }
-
-    // --------------------- DESCRIPTION -------------------- //
-    .descriptionContainer {
-        padding-top: 6px;
+    .card {
+        // ----------------- CARD GENERAL STYLE ----------------- //
         position: relative;
-        z-index: 10;
+
+        height: 350px;
+        min-width: 240px;
+        margin-bottom: 3rem;
+        border-top: 3px solid #000;
+        box-shadow: 3px 3px 5px 0px #bbbb, 0px 0px 3px 0px #bbbbbb20;
         background-color: #fff;
-        overflow: hidden;
 
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 10px;
+        // --------------------- CARD HEADER -------------------- //
+        /* 
+            Heights on title, organiser and address are a ajdust to give 
+            space to long texts but still give the card layout conscistency
+        */
+
+        .date,
+        .title,
+        .organiser,
+        .address {
+            font-size: 14px;
+            padding: 5px;
+        }
+
+        .date {
+            font-size: 12px;
+            height: 25px;
             border-bottom: 1px solid #000;
+            overflow: hidden;
+        }
+        .title {
+            // font-family: $oleo-script;
+            // font-family: var(--oleo-script);
+            font-size: 24px;
+            line-height: 24px;
+            height: 70px;
+        }
+        .organiser {
+            padding-top: 15px;
+            text-align: right;
+            line-height: 12px;
+            font-size: 12px;
+            height: 35px;
+        }
+        .address {
+            font-size: 14px;
+            height: 40px;
+            overflow: hidden;
 
-            cursor: pointer;
-
-            .headerTitle {
-                font-size: 14px;
-            }
-            .headerArrow {
-                font-size: 25px;
-                line-height: 0;
-
-                &.open {
-                    transform: rotate(180deg);
-                    transition: transform 0.5s;
-                }
-                &.close {
-                    transform: rotate(0deg);
-                    transition: transform 0.5s;
-                }
+            .mapsLink {
+                color: #27a8e0;
             }
         }
-        .descriptionText {
+
+        // --------------------- DESCRIPTION -------------------- //
+        .descriptionContainer {
+            padding-top: 6px;
+            position: relative;
+            z-index: 10;
             background-color: #fff;
-            height: 0px;
-            overflow-y: scroll;
-            scrollbar-width: none;
-            z-index: 3;
+            overflow: hidden;
 
-            p {
-                font-size: 14px;
-                line-height: 18px;
-                letter-spacing: 0.5px;
-                text-align: justify;
-            }
-
-            &::before {
-                content: '';
-                position: absolute;
-                pointer-events: none;
-                top: 32px;
-                left: -10%;
-                width: 120%;
-                height: calc(100% - 33px);
-                box-shadow: inset 0px 0px 10px 5px #fff;
-            }
-            &.open {
-                height: 120px;
-                border-bottom: 1px solid #000;
-                padding: 5px 0;
-                transition: height 500ms 200ms, padding 500ms;
-            }
-            &.close {
-                height: 0px;
-                transition: height 500ms, padding 500ms 200ms;
-            }
-        }
-    }
-    // ------------------------ IMAGE ----------------------- //
-    .imageLinkAndType {
-        width: 100%;
-        font-size: 110px;
-        color: #fff;
-        position: absolute;
-        bottom: 0;
-
-        // --------------- PLACEHOLDER FOR IMAGES --------------- //
-        .image {
-            background-color: #000;
-            height: 120px;
-            width: 100%;
-            text-align: center;
-        }
-
-        // -------------------- TYPE AND LINK ------------------- //
-
-        .typeAndLink {
-            display: flex;
-            justify-content: space-around;
-
-            .type,
-            .link {
-                padding: 4px;
-                font-size: 12px;
-                font-weight: 100;
-                text-align: center;
-                width: 50%;
-                border: none;
-                color: #000;
-            }
-            .type {
-                border-right: 1px solid #000;
-            }
-            .link {
+            .header {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                gap: 3px;
+                justify-content: space-between;
+                padding: 0 10px;
+                border-bottom: 1px solid #000;
 
-                p {
-                    font-size: 12px;
-                    color: $active-color;
-                    text-decoration: underline;
-                }
+                cursor: pointer;
 
-                svg {
-                    color: $active-color;
+                .headerTitle {
                     font-size: 14px;
-                    stroke-width: 1px;
-                    transform: rotate(45deg);
+                }
+                .headerArrow {
+                    font-size: 25px;
+                    line-height: 0;
+
+                    &.open {
+                        transform: rotate(180deg);
+                        transition: transform 0.5s;
+                    }
+                    &.close {
+                        transform: rotate(0deg);
+                        transition: transform 0.5s;
+                    }
                 }
             }
+            .descriptionText {
+                background-color: #fff;
+                height: 0px;
+                overflow-y: scroll;
+                scrollbar-width: none;
+                z-index: 3;
+
+                p {
+                    font-size: 14px;
+                    line-height: 18px;
+                    letter-spacing: 0.5px;
+                    text-align: justify;
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    pointer-events: none;
+                    top: 32px;
+                    left: -10%;
+                    width: 120%;
+                    height: calc(100% - 33px);
+                    box-shadow: inset 0px 0px 10px 5px #fff;
+                }
+                &.open {
+                    height: 120px;
+                    border-bottom: 1px solid #000;
+                    padding: 5px 0;
+                    transition: height 500ms 200ms, padding 500ms;
+                }
+                &.close {
+                    height: 0px;
+                    transition: height 500ms, padding 500ms 200ms;
+                }
+            }
+        }
+        // ------------------------ IMAGE ----------------------- //
+        .imageLinkAndType {
+            width: 100%;
+            font-size: 110px;
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+
+            // --------------- PLACEHOLDER FOR IMAGES --------------- //
+            .image {
+                background-color: #000;
+                height: 120px;
+                width: 100%;
+                text-align: center;
+            }
+
+            // -------------------- TYPE AND LINK ------------------- //
+
+            .typeAndLink {
+                display: flex;
+                justify-content: space-around;
+
+                .type,
+                .link {
+                    padding: 4px;
+                    font-size: 12px;
+                    font-weight: 100;
+                    text-align: center;
+                    width: 50%;
+                    border: none;
+                    color: #000;
+                }
+                .type {
+                    border-right: 1px solid #000;
+                }
+                .link {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 3px;
+
+                    p {
+                        font-size: 12px;
+                        color: $active-color;
+                        text-decoration: underline;
+                    }
+
+                    svg {
+                        color: $active-color;
+                        font-size: 14px;
+                        stroke-width: 1px;
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ------------------------------------------------------ //
+// ------------- CARD STYLES FOR PAST EVENTS ------------ //
+// ------------------------------------------------------ //
+
+.cardContainer {
+    // prettier-ignore
+    &.past {
+        $past-color: #d0d0d0;
+        color: $past-color;
+        border-color: $past-color;
+
+        .day { color: inherit; }
+        .card {
+            border-color: $past-color;
+            a { color: $past-color; }
+
+            .date { border-color: inherit; }
+            .address {
+                .mapsLink { color: $past-color; }
+            }
+
+            .descriptionContainer {
+                .header { border-color: inherit; }
+                .descriptionText {
+                    &.open { border-color: inherit; }
+                }
+            }
+            .imageLinkAndType {
+                .image { background-color: $past-color; }
+                .typeAndLink {
+                    .type {
+                        border-color: inherit;
+                        color: $past-color;
+                    }
+                    .link {
+                        p, svg { color: $past-color; }
+                    }
+                }
+            }
+
         }
     }
 }

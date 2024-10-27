@@ -22,7 +22,8 @@
             "@/components/*": ["./src/app/Components/*"],
             "@/layouts/*": ["./src/app/LayoutsComponents/*"],
             "@/types/*": ["./src/app/Types/*"],
-            "@/fonts": ["./src/app/Fonts/fonts.ts"]
+            "@/fonts": ["./src/app/Fonts/fonts.ts"],
+            "@/functions/*": ["./src/app/Functions/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

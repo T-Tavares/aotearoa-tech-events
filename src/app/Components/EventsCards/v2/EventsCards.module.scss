@@ -1,5 +1,9 @@
 @import '@/variables.scss';
 
+// ------------------------------------------------------ //
+// ----------------- EVENTS CARD STYLING ---------------- //
+// ------------------------------------------------------ //
+
 .month {
     $font-size: clamp(20px, 3vw, 30px);
 
@@ -82,7 +86,8 @@
         cursor: grab;
 
         display: flex;
-        gap: 20px;
-        padding: 0 3rem;
+        justify-content: center;
+        gap: 30px;
+        padding: 30px 3rem;
     }
 }
