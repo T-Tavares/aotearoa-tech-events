@@ -1,59 +1,129 @@
 'use client';
 
 import ss from './EventsCards.module.scss';
-import {useState, useEffect, useRef} from 'react';
-
-import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from 'react-icons/md';
-import {IoArrowBackCircleSharp, IoArrowForwardCircleSharp} from 'react-icons/io5';
-
-import type {Event} from '@/Types/Types';
+import {useState, useRef} from 'react';
 import Card from '@/components/Card/v4/Card';
-import Loading from '@/components/Loading/Loading';
-import Filter from '@/Components/Filter/Filter';
-import {dataFetch} from './DataFetch';
-import {PoetsenOne} from '@/fonts';
+import {getTodaysDateMS} from '@/Functions/dateHelpers';
 
 const EventsCards: React.FC = () => {
-    // ------------- DATABASE AND LOADING STATES ------------ //
+    // -------------- DRAGGING STATE VARIABLES -------------- //
 
-    const [database, setDatabase] = useState<Event[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const BASIS_SPEED = 10; //                                                  Basis Speed for Scrolling
 
-    // ------------------------------------------------------ //
-    // ------------- DATABASE FETCHING useEffect ------------ //
-    // ------------------------------------------------------ //
-
-    useEffect(() => {
-        dataFetch({setDatabase, setLoading});
-    }, []);
+    const cardsContainerRef = useRef<HTMLDivElement>(null); //                  Ref to Cards Container
+    const [isDragging, setIsDragging] = useState(false); //                     Dragging State
+    const [dragStart, setDragStart] = useState({startX: 0, startTime: 0}); //   Mouse Start Position and Time => For Speed Calculation
+    const [mouseX, setMouseX] = useState(0); //                                 Current Mouse ClientX Position
+    const [prevDirection, setPrevDirection] = useState<'left' | 'right'>(); //  State used to catch changing in direction
 
     // ------------------------------------------------------ //
-    // ----------------- COMPONENT RENDERING ---------------- //
+    // -------------- DRAGGING HELPER FUNCTIONS ------------- //
     // ------------------------------------------------------ //
 
-    // if (loading) return <Loading message="We are searching for the Best Events, this wont take long" />;
+    const getDragSpeed = (direction: 'left' | 'right') => {
+        //
+        const {startTime, startX} = dragStart;
+        const endTime = getTodaysDateMS();
+        const distance = direction === 'left' ? mouseX - startX : startX - mouseX;
+        const speed = distance / (endTime - startTime);
+        return +speed.toFixed(2);
+    };
+
+    const shiftDirectionReset = (direction: 'left' | 'right', e: React.MouseEvent) => {
+        setPrevDirection(prevDirection => {
+            if (prevDirection === direction) return direction;
+            setDragStart({startX: e.clientX, startTime: getTodaysDateMS()});
+            setMouseX(e.clientX);
+            return direction;
+        });
+    };
+
+    const smoothingScrollEnd = (speed?: number) => {
+        if (!speed) return;
+
+        const screenWidth = window.innerWidth;
+        const scrollLeft = cardsContainerRef.current!.scrollLeft;
+
+        let scrollSmoothDistance;
+        if (speed < 1) scrollSmoothDistance = 0;
+        else if (speed >= 1 && speed < 2) scrollSmoothDistance = screenWidth / 4;
+        else if (speed >= 2 && speed < 3) scrollSmoothDistance = screenWidth / 2;
+        else scrollSmoothDistance = screenWidth;
+
+        cardsContainerRef.current!.style.scrollBehavior = 'smooth';
+
+        if (scrollSmoothDistance) {
+            if (prevDirection === 'left') cardsContainerRef.current!.scrollLeft = scrollLeft - scrollSmoothDistance!;
+            else if (prevDirection === 'right')
+                cardsContainerRef.current!.scrollLeft = scrollLeft + scrollSmoothDistance!;
+        }
+
+        setTimeout(() => (cardsContainerRef.current!.style.scrollBehavior = 'auto'), 500);
+    };
+
+    // ------------------------------------------------------ //
+    // ------------- DRAGGING HANDLER FUNCTIONS ------------- //
+    // ------------------------------------------------------ //
+
+    const handlerOnMouseDown = (e: React.MouseEvent) => {
+        cardsContainerRef.current!.style.scrollBehavior = 'auto'; // Just to make sure Scroll Behavior is set to Auto
+
+        setIsDragging(true);
+        setDragStart({startX: e.clientX, startTime: getTodaysDateMS()});
+        setMouseX(e.clientX);
+    };
+
+    const handlerOnMouseUp = () => {
+        setIsDragging(false);
+
+        // ----------- SMOOTHNESS WHEN LET GO OF DRAG ----------- //
+        const speed = getDragSpeed(prevDirection!);
+        smoothingScrollEnd(speed);
+    };
+
+    const handlerOnMouseMove = (e: React.MouseEvent) => {
+        if (!isDragging) return;
+        setMouseX(e.clientX);
+
+        if (mouseX < e.clientX) {
+            //
+            // ---------------- LEFT DIRECTION LOGIC ---------------- //
+
+            shiftDirectionReset('left', e);
+            const speed = getDragSpeed('left');
+            cardsContainerRef.current!.scrollLeft -= 1 * BASIS_SPEED * speed;
+            //
+        } else if (mouseX > e.clientX) {
+            //
+            // ---------------- RIGHT DIRECTION LOGIC --------------- //
+
+            shiftDirectionReset('right', e);
+            const speed = getDragSpeed('right');
+            cardsContainerRef.current!.scrollLeft += 1 * BASIS_SPEED * speed;
+            //
+        }
+    };
 
     return (
-        <>
-            <Filter />
-            <div className={ss.month}>
-                <MdKeyboardArrowLeft />
-                <p className={PoetsenOne.className}>October</p>
-                <MdKeyboardArrowRight />
-            </div>
-            <div className={ss.eventsCardsContainer}>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-            </div>
-        </>
+        <div
+            className={ss.eventsCardsContainer}
+            ref={cardsContainerRef}
+            onMouseDown={handlerOnMouseDown}
+            onMouseUp={handlerOnMouseUp}
+            onMouseMove={handlerOnMouseMove}
+            onMouseLeave={handlerOnMouseUp}
+        >
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+        </div>
     );
 };
 

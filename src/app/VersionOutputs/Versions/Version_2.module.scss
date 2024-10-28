@@ -3,31 +3,19 @@
 .layout {
     // ------------------- DESKTOP LAYOUT ------------------- //
 
-    $header-height: 120px;
-    $footer-height: 390px;
-
-    min-height: calc(100dvh + $footer-height);
+    min-height: calc(100dvh + 390px);
 
     display: grid;
-    grid-template-rows: $header-height 1fr $footer-height;
+    grid-template-rows: 120px 1fr 390px;
     grid-template-areas:
         'header'
         'content'
         'footer';
 
-    // ----------- HANDLING TABLET RESPONSIVINESS ----------- //
-
-    // @media (max-width: $tablet-width-breakpoint) {
-    // }
-
     // ----------- HANDLING MOBILE RESPONSIVINESS ----------- //
 
     @media (max-width: $mobile-width-breakpoint) {
-        $header-height: 60px;
-        $footer-height: 850px;
-
-        min-height: calc(100dvh + $footer-height);
-        grid-template-rows: $header-height min(1fr) $footer-height;
+        grid-template-rows: 60px 1fr 850px;
     }
 }
 
@@ -37,10 +25,14 @@
 
 .header {
     grid-area: header;
+    // border: 1px solid #aaa;
 }
 .content {
     grid-area: content;
+
+    // border: 1px solid #aaa;
 }
 .footer {
     grid-area: footer;
+    // border: 1px solid #aaa;
 }

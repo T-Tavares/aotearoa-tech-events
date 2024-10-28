@@ -9,5 +9,5 @@ export const getDay = (millisecondsDate: number) => {
     return date.getDate();
 };
 
-export const getTodaysDateMS = () => new Date(2024, 9, 24).getTime();
-// export const getTodaysDateMS = () => new Date().getTime();
+// export const getTodaysDateMS = () => new Date(2024, 9, 24).getTime();
+export const getTodaysDateMS = () => new Date().getTime();

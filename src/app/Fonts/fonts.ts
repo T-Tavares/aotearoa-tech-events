@@ -1,5 +1,5 @@
 import localFont from 'next/font/local';
-import {Karla as KarlaImport} from 'next/font/google';
+import {Karla as KarlaImport, Playfair as PlayfairImport} from 'next/font/google';
 
 export const OpenSans = localFont({src: './OpenSans/static/OpenSans-Regular.ttf', variable: '--open-sans'});
 export const OpenSansBold = localFont({src: './OpenSans/static/OpenSans-ExtraBold.ttf', variable: '--open-sans-bold'});
@@ -18,5 +18,10 @@ export const Karla = KarlaImport({
 });
 export const KarlaBold = KarlaImport({
     weight: '800',
+    subsets: ['latin-ext'],
+});
+
+export const Playfair = PlayfairImport({
+    weight: '600',
     subsets: ['latin-ext'],
 });

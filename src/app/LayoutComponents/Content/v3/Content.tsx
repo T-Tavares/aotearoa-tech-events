@@ -1,12 +1,16 @@
 'use client';
-import {PlaywriteUDTrad} from '@/fonts';
 import ss from './Content.module.scss';
 import EventsCards from '@/Components/EventsCards/v3/EventsCards';
+import FiltersBox from '@/Components/Filters/FiltersBox';
+import Title from './SubComponents/Title/Title';
+import Period from './SubComponents/Period/Period';
 
 const Content: React.FC = () => {
     return (
         <div className={`${ss.content}`}>
-            <h1 className={PlaywriteUDTrad.className}>Events</h1>
+            <Title title="Events" />
+            <Period />
+            <FiltersBox />
             <EventsCards />
         </div>
     );

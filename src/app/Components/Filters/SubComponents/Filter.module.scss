@@ -1,0 +1,35 @@
+@import '@/variables.scss';
+
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: min(300px, 80%);
+    padding: 0 5px;
+
+    border-bottom: 1px solid #222;
+    font-size: 14px;
+
+    .option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        p {
+            color: $active-color;
+        }
+
+        .arrowDown {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            width: 15px;
+            height: 15px;
+
+            background-color: $active-color;
+            font-size: 15px;
+            color: #fff;
+        }
+    }
+}

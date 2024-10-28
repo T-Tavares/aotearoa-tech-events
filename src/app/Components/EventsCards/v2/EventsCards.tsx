@@ -9,7 +9,7 @@ import {IoArrowBackCircleSharp, IoArrowForwardCircleSharp} from 'react-icons/io5
 import type {Event} from '@/Types/Types';
 import Card from '@/components/Card/v3/Card';
 import Loading from '@/components/Loading/Loading';
-import Filter from '@/Components/Filter/Filter';
+import Filter from '@/Components/Filters/FiltersBox';
 import {dataFetch} from './DataFetch';
 import {PoetsenOne} from '@/fonts';
 

@@ -1,0 +1,10 @@
+@import '@/variables.scss';
+
+.filtersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 30px;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
