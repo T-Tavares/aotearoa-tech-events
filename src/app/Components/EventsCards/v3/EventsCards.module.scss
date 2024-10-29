@@ -43,10 +43,9 @@
 
         .scrollBarThumb {
             position: absolute;
-            left: 50%;
-            width: 50px;
+            left: 0;
             height: 30px;
-            // background-color: #000;
+
             border: 1px solid #000;
             border-color: transparent #000 transparent #000;
             cursor: pointer;
