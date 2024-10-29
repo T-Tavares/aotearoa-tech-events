@@ -3,6 +3,7 @@ export interface Event {
     endDate?: number;
     startTime?: number;
     endTime?: number;
+    isPastEvent: boolean;
     region: string;
     title: string;
     blurb: string;

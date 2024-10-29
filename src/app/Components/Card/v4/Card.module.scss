@@ -1,7 +1,131 @@
 @import '@/variables.scss';
 
 .card {
+    $border-colour: #555;
+    $padding-difference: 0 5px;
+
+    user-select: none;
+
     flex: 0 0 240px;
     height: 370px;
-    background-color: red;
+    border: 1px solid $border-colour;
+    padding: 3px;
+    border-color: transparent $border-colour transparent $border-colour;
+
+    display: grid;
+    grid-template-rows: 40px 90px 50px 145px 25px 20px;
+    // Date | Title | Address | Description | Type & Link | Organiser
+    //  40  |   90  |   50    |    145      |     25      |    20
+
+    .date {
+        font-size: 30px;
+        border-bottom: 1px solid $border-colour;
+        padding: $padding-difference;
+    }
+    .title {
+        font-size: 20px;
+        line-height: 20px;
+        padding: $padding-difference;
+    }
+    .address {
+        font-size: 14px;
+        overflow-y: hidden;
+        padding: $padding-difference;
+        a {
+            color: $active-color;
+            // color: #000;
+            text-decoration: none;
+        }
+    }
+    .descriptionAndImage {
+        position: relative;
+        overflow-y: hidden;
+
+        .descriptionHeader {
+            height: 25px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid $border-colour;
+            padding: 0 5px;
+            svg {
+                font-size: 22px;
+                color: $active-color;
+            }
+        }
+        .description {
+            position: absolute;
+            top: 25px;
+            left: 0;
+
+            overflow-y: scroll;
+            scrollbar-width: none;
+            background-color: #fff;
+            font-size: 14px;
+            text-align: justify;
+
+            height: 0px;
+            transition: height 300ms ease-in-out;
+
+            p {
+                padding: 5px;
+            }
+            &.open {
+                transition: height 300ms ease-in-out;
+                border-bottom: 1px solid $border-colour;
+
+                height: 120px;
+            }
+        }
+        .image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #777;
+            font-size: 80px;
+            color: #fff;
+            height: 120px;
+        }
+    }
+    .typeAndLink {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        text-align: center;
+        border-bottom: 1px solid $border-colour;
+
+        .type {
+            flex: 0 0 50%;
+
+            padding: 3px;
+            border-right: 1px solid $border-colour;
+        }
+        .link {
+            flex: 0 0 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+
+            color: $active-color;
+            svg {
+                transform: rotate(45deg) translateY(2px);
+            }
+        }
+    }
+    .organiser {
+        font-size: 12px;
+        line-height: 12px;
+        padding: $padding-difference;
+        padding-top: 3px;
+    }
+}
+
+.card {
+    &.past {
+        filter: grayscale(100%);
+        opacity: 0.3;
+    }
 }

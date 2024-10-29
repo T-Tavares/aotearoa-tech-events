@@ -25,6 +25,7 @@ export const dataFetch = async ({setDatabase, setLoading}: FetchDispatchers): Pr
             endDate: endDate,
             startTime: startTime,
             endTime: endTime,
+            isPastEvent: startDate < new Date().getTime(),
             region: eventValues[1],
             title: eventValues[2],
             blurb: eventValues[3],
@@ -35,7 +36,7 @@ export const dataFetch = async ({setDatabase, setLoading}: FetchDispatchers): Pr
             notes: eventValues[8],
         } as Event;
     });
-
+    console.log(formatedData);
     setDatabase(formatedData);
     setLoading(false);
 };
