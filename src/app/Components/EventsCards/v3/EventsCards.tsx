@@ -1,7 +1,7 @@
 'use client';
 
 import ss from './EventsCards.module.scss';
-import {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect, useCallback} from 'react';
 import Card from '@/components/Card/v4/Card';
 import {Event} from '@/Types/Types';
 import {getTodaysDateMS} from '@/Functions/dateHelpers';
@@ -16,8 +16,8 @@ const EventsCards: React.FC = () => {
     const refCardsContainer = useRef<HTMLDivElement>(null); //                  Ref to Cards Container
     const refDivisor = useRef<HTMLDivElement>(null); //                         Ref to Divisor
 
-    const refScrollBar = useRef<HTMLDivElement>(null); //                       Ref to ScrollBar
-    const refScrollBarThumb = useRef<HTMLDivElement>(null); //                  Ref to ScrollBarThum
+    const refScrollBar = useRef<HTMLInputElement>(null); //                     Ref to ScrollBar
+    const refScrollBarThumb = useRef<HTMLInputElement>(null); //                     Ref to ScrollBar
 
     // ------------------- DATABASE STATE ------------------- //
 
@@ -35,7 +35,7 @@ const EventsCards: React.FC = () => {
 
     const cardsContainer = () => refCardsContainer.current!;
     const scrollBar = () => refScrollBar.current!;
-    const scrollBarThumb = () => refScrollBarThumb.current!;
+    const scrolBarThumb = () => refScrollBarThumb.current!;
     const divisor = () => refDivisor.current!;
 
     // ------------------------------------------------------ //
@@ -60,17 +60,24 @@ const EventsCards: React.FC = () => {
         });
     };
 
-    const smoothingScrollEnd = (speed?: number) => {
-        if (!speed) return;
-
+    const getScrollSmoothDistance = (speed: number) => {
         const screenWidth = window.innerWidth;
-        const scrollLeft = refCardsContainer.current!.scrollLeft;
 
         let scrollSmoothDistance;
+
         if (speed < 1) scrollSmoothDistance = 0;
         else if (speed >= 1 && speed < 2) scrollSmoothDistance = screenWidth / 4;
         else if (speed >= 2 && speed < 3) scrollSmoothDistance = screenWidth / 2;
         else scrollSmoothDistance = screenWidth;
+
+        return scrollSmoothDistance;
+    };
+
+    const smoothingScrollEnd = (speed?: number) => {
+        if (!speed) return;
+
+        const scrollLeft = refCardsContainer.current!.scrollLeft;
+        const scrollSmoothDistance = getScrollSmoothDistance(speed);
 
         refCardsContainer.current!.style.scrollBehavior = 'smooth';
 
@@ -79,23 +86,12 @@ const EventsCards: React.FC = () => {
             else if (prevDirection === 'right')
                 refCardsContainer.current!.scrollLeft = scrollLeft + scrollSmoothDistance!;
         }
-
-        // --------------- SMOOTHNESS OF SCROLLBAR -------------- //
-        // TODO - Apply continuous smoothness to ScrollBar Thumb -> maybe consider speed logic to how far it should go
-
-        scrollBarThumb().style.transition = 'left 0.5s';
-        setTimeout(() => {
-            scrollBarThumb().style.left = `${getScrollPositionPercentage()}%`;
-            refCardsContainer.current!.style.scrollBehavior = 'auto';
-        }, 500);
-        setTimeout(() => (scrollBarThumb().style.transition = 'none'), 1000);
     };
 
     const smoothScrollTo = (position: number) => {
         refCardsContainer.current!.style.scrollBehavior = 'smooth';
         refCardsContainer.current!.scrollLeft = position;
         setTimeout(() => {
-            scrollBarThumb().style.left = `${getScrollPositionPercentage()}%`;
             refCardsContainer.current!.style.scrollBehavior = 'auto';
         }, 300);
     };
@@ -111,10 +107,11 @@ const EventsCards: React.FC = () => {
         return screenToScrollPercentage;
     };
 
-    const getScrollPositionPercentage = () => {
-        const totalScrollWidth = refCardsContainer.current!.scrollWidth;
-        const totalScrollLeft = refCardsContainer.current!.scrollLeft;
+    const getScrollPosition = (el: HTMLDivElement) => {
+        const totalScrollWidth = el.scrollWidth;
+        const totalScrollLeft = el.scrollLeft;
         const percentage = +((totalScrollLeft / totalScrollWidth) * 100).toFixed(2);
+
         return percentage;
     };
 
@@ -123,8 +120,7 @@ const EventsCards: React.FC = () => {
     // ------------------------------------------------------ //
 
     const handlerOnMouseDown = (e: React.MouseEvent) => {
-        refCardsContainer.current!.style.scrollBehavior = 'auto'; // Just to make sure Scroll Behavior is set to Auto
-
+        cardsContainer().style.scrollBehavior = 'auto'; // Just to make sure Scroll Behavior is set to Auto
         setIsDragging(true);
         setDragStart({startX: e.clientX, startTime: getTodaysDateMS()});
         setMouseX(e.clientX);
@@ -136,6 +132,10 @@ const EventsCards: React.FC = () => {
         // ----------- SMOOTHNESS WHEN LET GO OF DRAG ----------- //
         const speed = getDragSpeed(prevDirection!);
         smoothingScrollEnd(speed);
+        const scrollSmoothDistance = getScrollSmoothDistance(speed);
+
+        const scrollDistancePercentage = +((scrollSmoothDistance / cardsContainer().scrollWidth) * 100).toFixed();
+        setTimeout(() => (scrollBar().value = `${getScrollPosition(cardsContainer())}`), 400);
     };
 
     const handlerOnMouseMove = (e: React.MouseEvent) => {
@@ -150,7 +150,7 @@ const EventsCards: React.FC = () => {
             const speed = getDragSpeed('left');
             const increment = 1 * BASIS_SPEED * speed;
             cardsContainer().scrollLeft -= increment;
-            scrollBarThumb().style.left = `${getScrollPositionPercentage()}%`;
+            scrollBar().value = `${getScrollPosition(cardsContainer())}`;
 
             //
         } else if (mouseX > e.clientX) {
@@ -161,7 +161,8 @@ const EventsCards: React.FC = () => {
             const speed = getDragSpeed('right');
             const increment = 1 * BASIS_SPEED * speed;
             cardsContainer().scrollLeft += increment;
-            scrollBarThumb().style.left = `${getScrollPositionPercentage()}%`;
+            scrollBar().value = `${getScrollPosition(cardsContainer())}`;
+
             //
         }
     };
@@ -170,12 +171,11 @@ const EventsCards: React.FC = () => {
     // ----------- SCROLLING BAR HANDLER FUNCTIONS ---------- //
     // ------------------------------------------------------ //
 
-    const handlerScrollArrow = (direction: 'left' | 'right') => {
-        const screenWidth = window.innerWidth;
-        const currScrollLeft = refCardsContainer.current!.scrollLeft;
-
-        if (direction === 'left') smoothScrollTo(currScrollLeft - screenWidth * 0.9); //  Scroll Left
-        else smoothScrollTo(currScrollLeft + screenWidth * 0.9); //                       Scroll Right
+    const handlerScrollBar = (e: React.ChangeEvent<HTMLInputElement>) => {
+        cardsContainer().style.scrollBehavior = 'auto';
+        const scrollOffset = +((cardsContainer().scrollWidth * +e.target.value) / 100).toFixed(0);
+        cardsContainer().scrollLeft = scrollOffset;
+        scrolBarThumb().style.left = `${e.target.value}%`;
     };
 
     // ------------------------------------------------------ //
@@ -189,28 +189,12 @@ const EventsCards: React.FC = () => {
     // ----------- SCROLL ACTIVE EVENTS INTO VIEW ----------- //
 
     useEffect(() => {
-        if (refCardsContainer.current === null || refScrollBar.current === null) return;
-        const position = getScrollPositionPercentage();
-        console.log(position);
+        if (divisor() === null) return;
+        console.log('Divisor:', divisor());
+        setTimeout(() => divisor().scrollIntoView({behavior: 'smooth', block: 'end', inline: 'start'}), 300);
+    }, [refDivisor.current]);
 
-        scrollBarThumb().style.width = `${getScreenToScrollPercentage()}%`;
-
-        setTimeout(() => {
-            divisor().scrollIntoView({behavior: 'smooth', block: 'end', inline: 'start'});
-            scrollBarThumb().scrollIntoView({behavior: 'smooth', block: 'end'});
-        }, 300);
-
-        setTimeout(() => (scrollBarThumb().style.left = `${getScrollPositionPercentage()}%`), 1000);
-
-        const totalEvents = database.length;
-        const pastEvents = database.reduce((acc, currEvent) => {
-            if (currEvent.isPastEvent) acc++;
-            return acc;
-        }, 0);
-        const pastEventsPercentage = +((pastEvents / totalEvents) * 100).toFixed(0);
-
-        refScrollBar.current!.style.background = `linear-gradient(to right, #eee ${pastEventsPercentage}%, #1cb9ed ${pastEventsPercentage}%)`;
-    }, [database]);
+    // useEffect(() => {}, []);
 
     // ------------------------------------------------------ //
     // ------------------ COMPONENT RENDERS ----------------- //
@@ -243,12 +227,13 @@ const EventsCards: React.FC = () => {
                     return <Card key={event.title} event={event} />;
                 })}
             </div>
-            <div className={ss.scrollBar}>
-                <MdKeyboardArrowLeft className={ss.scrollBarArrows} onClick={() => handlerScrollArrow('left')} />
-                <div className={ss.scrollBarGuide} ref={refScrollBar}>
-                    <div className={ss.scrollBarThumb} ref={refScrollBarThumb}></div>
+            <div className={ss.scrollBarContainer}>
+                <MdKeyboardArrowLeft className={ss.scrollBarArrows} />
+                <div className={ss.scrollBar}>
+                    <input type="range" ref={refScrollBar} onChange={handlerScrollBar} />
+                    <div className={ss.scrolBarThumb} ref={refScrollBarThumb}></div>
                 </div>
-                <MdKeyboardArrowRight className={ss.scrollBarArrows} onClick={() => handlerScrollArrow('right')} />
+                <MdKeyboardArrowRight className={ss.scrollBarArrows} />
             </div>
         </>
     );

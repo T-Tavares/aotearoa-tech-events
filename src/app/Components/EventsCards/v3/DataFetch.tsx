@@ -36,7 +36,6 @@ export const dataFetch = async ({setDatabase, setLoading}: FetchDispatchers): Pr
             notes: eventValues[8],
         } as Event;
     });
-    console.log(formatedData);
     setDatabase(formatedData);
     setLoading(false);
 };
