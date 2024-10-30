@@ -16,12 +16,26 @@ const pauliSosa: TCurator = {
     titles: `Co-Founder @ MUV Talks Head of Community & Events @ Caffeine Daily`,
 };
 
+const songYi: TCurator = {
+    name: 'Song Yi',
+    email: 'songy@email.com',
+    socialLink: 'https://www.linkedin.com/in/songyifeng/',
+    titles: 'Founder of techEvents, Creative Director',
+};
+const thiagoTavares: TCurator = {
+    name: 'Thiago Tavares',
+    email: 'thiagotavares@email.com',
+    socialLink: 'https://www.linkedin.com/in/ttavaresf/',
+    titles: 'Founder of techEvents, Software Director',
+};
+
 const Footer: React.FC = () => {
     return (
         <div className={ss.footer}>
             <div className={ss.curation}>
-                <p className={ss.curationTitle}>This Techstars Start up Digest newsletter is curated by:</p>
-                <Curator curator={paulSpence} />
+                {/* <p className={ss.curationTitle}>This Techstars Start up Digest newsletter is curated by:</p> */}
+                <Curator curator={songYi} />
+                <Curator curator={thiagoTavares} />
                 <Curator curator={pauliSosa} />
             </div>
             <div className={ss.subscribe}>
@@ -30,8 +44,8 @@ const Footer: React.FC = () => {
                 <button>Subscribe</button>
             </div>
             <div className={ss.copyright}>
-                <p>Copyright © 2024 Techstars Startup Digest New Zealand, All rights reserved</p>
-                <p>228 Park Avenue S, PMB 99696, New York, NY 10003-1502</p>
+                <p>Copyright © 2024 techEvents New Zealand, All rights reserved</p>
+                {/* <p>228 Park Avenue S, PMB 99696, New York, NY 10003-1502</p> */}
             </div>
         </div>
     );
