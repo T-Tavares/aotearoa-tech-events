@@ -6,7 +6,7 @@ import {FaImage} from 'react-icons/fa6';
 import {FaArrowUp} from 'react-icons/fa';
 
 import {Playfair, Karla} from '@/Fonts/fonts';
-import {getLocaleDateString, getDay, getTodaysDateMS} from '@/functions/dateHelpers';
+import {getLocaleDateString} from '@/functions/dateHelpers';
 import type {Event} from '@/Types/Types';
 
 const Card: React.FC<{event: Event}> = ({event}) => {

@@ -4,7 +4,8 @@ import type {Event} from '@/Types/Types';
 const Card: React.FC<{event: Event}> = ({event}) => {
     console.log(event);
 
-    const {blurb, date, title, organiserDetails, type} = event;
+    // const {blurb, date, title, organiserDetails, type} = event;
+    const {blurb, title, organiserDetails, type} = event;
 
     return (
         <div className={ss.card}>
@@ -12,7 +13,7 @@ const Card: React.FC<{event: Event}> = ({event}) => {
                 <p className={ss.title}>{title}</p>
                 <p className={ss.organiser}>{organiserDetails}</p>
             </div>
-            <p className={ss.date}>{date}</p>
+            {/* <p className={ss.date}>{date}</p> */}
             <p className={ss.address}>{type}</p>
             <div className={ss.blurb}>{blurb}</div>
         </div>

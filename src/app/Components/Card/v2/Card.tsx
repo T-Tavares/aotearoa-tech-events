@@ -8,7 +8,8 @@ import {FaArrowUp} from 'react-icons/fa';
 import {useState} from 'react';
 
 const Card: React.FC<{event: Event}> = ({event}) => {
-    const {blurb, date, title, organiserDetails, type, ticketLink, venue} = event;
+    // const {blurb, date, title, organiserDetails, type, ticketLink, venue} = event;
+    const {blurb, title, organiserDetails, type, ticketLink, venue} = event;
     const [isOpen, setIsOpen] = useState(false);
 
     const address = venue.slice(0, 45);
@@ -17,7 +18,7 @@ const Card: React.FC<{event: Event}> = ({event}) => {
 
     return (
         <div className={`${ss.card} ${openToggleCSS}`}>
-            <p className={ss.date}>{date}</p>
+            {/* <p className={ss.date}>{date}</p> */}
             <p className={ss.title}>{title}</p>
             <p className={ss.organiser}>by {organiserDetails}</p>
             <div className={ss.address}>

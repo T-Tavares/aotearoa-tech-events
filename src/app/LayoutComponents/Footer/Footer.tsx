@@ -2,12 +2,12 @@ import ss from './Footer.module.scss';
 import Curator from './SubComponents/Curator';
 import type {Curator as TCurator} from './SubComponents/Curator';
 
-const paulSpence: TCurator = {
-    name: 'Paul Spence',
-    email: 'enpaul.spence@gmail.com',
-    socialLink: 'https://www.linkedin.com/in/enpaulspence/',
-    titles: 'Business lecturer @ Lincoln University. Previously cofounder @ iwantmyname, Creative Forest. Working on Genius ReFi',
-};
+// const paulSpence: TCurator = {
+//     name: 'Paul Spence',
+//     email: 'enpaul.spence@gmail.com',
+//     socialLink: 'https://www.linkedin.com/in/enpaulspence/',
+//     titles: 'Business lecturer @ Lincoln University. Previously cofounder @ iwantmyname, Creative Forest. Working on Genius ReFi',
+// };
 
 const pauliSosa: TCurator = {
     name: 'Pauli Sosa',
