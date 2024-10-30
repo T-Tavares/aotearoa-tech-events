@@ -5,13 +5,15 @@ import {fromStringToDate} from '@/Functions/fromStringToDate';
 type FetchDispatchers = {
     setDatabase: React.Dispatch<React.SetStateAction<Event[]>>;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    monthGID: string;
 };
 
-const DB_URL =
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vSP42ZXMPf2mwga0fC0VJuQKF3Dkt7IKJQgSp0z55Kc9FxFpbG5x-_onSwHn8mpMM3-sOP8IDz7W07X/pub?output=csv';
+const getDBLink = (monthGID: string) => {
+    return `https://docs.google.com/spreadsheets/d/e/2PACX-1vSP42ZXMPf2mwga0fC0VJuQKF3Dkt7IKJQgSp0z55Kc9FxFpbG5x-_onSwHn8mpMM3-sOP8IDz7W07X/pub?gid=${monthGID}&single=true&output=csv`;
+};
 
-export const dataFetch = async ({setDatabase, setLoading}: FetchDispatchers): Promise<void> => {
-    const response = await fetch(DB_URL, {headers: {'content-type': 'text/csv'}});
+export const dataFetch = async ({setDatabase, setLoading, monthGID}: FetchDispatchers): Promise<void> => {
+    const response = await fetch(getDBLink(monthGID), {headers: {'content-type': 'text/csv'}});
     const data = await response.text();
     const parsedData = Papa.parse(data, {header: true}).data as Event[];
 
@@ -25,6 +27,7 @@ export const dataFetch = async ({setDatabase, setLoading}: FetchDispatchers): Pr
             endDate: endDate,
             startTime: startTime,
             endTime: endTime,
+            // isPastEvent: startDate < new Date(2024, 9, 10).getTime(),
             isPastEvent: startDate < new Date().getTime(),
             region: eventValues[1],
             title: eventValues[2],

@@ -1,61 +1,37 @@
+@import '@/variables.scss';
+
 .loadingContainer {
-    height: 530px;
+    height: 535px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     justify-content: center;
     align-items: center;
-
-    // prettier-ignore
-    @keyframes spin {
-        0% {transform: rotate(360deg);}
-        100% {transform: rotate(0deg);}
-    }
     .message {
-        width: 80%;
         text-align: center;
+        width: 70%;
+        margin: 0 auto;
     }
-    .loading {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        .loadingWheel {
-            position: relative;
+    .loader {
+        height: 6px;
+        width: 130px;
+        width: min(300px, 80%);
+        --c: no-repeat linear-gradient(#1cb9ed 0 0);
+        background: var(--c), var(--c), #ccc;
+        background-size: 60% 100%;
+        animation: l16 3s infinite;
+    }
 
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-            background: conic-gradient(#000, transparent 70%);
-
-            // ------------------ MIDDLE WHITE MASK ----------------- //
-            &::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-
-                height: 35px;
-                width: 35px;
-                border-radius: 50%;
-                background-color: #fff;
-            }
-            // -------------- ROUNDNESS OF LOADING TIP -------------- //
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: calc(50% - 5px);
-
-                z-index: 1;
-                height: 8px;
-                width: 8px;
-                border-radius: 50%;
-                background-color: #000;
-            }
-            animation: spin 2s linear infinite forwards;
+    @keyframes l16 {
+        0% {
+            background-position: -150% 0, -150% 0;
+        }
+        66% {
+            background-position: 250% 0, -150% 0;
+        }
+        100% {
+            background-position: 250% 0, 250% 0;
         }
     }
 }

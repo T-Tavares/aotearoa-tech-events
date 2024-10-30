@@ -11,11 +11,12 @@
     scrollbar-width: none;
     gap: 8px;
     overflow-x: scroll;
-    overflow-y: visible;
+    // overflow-y: hidden;
     padding: 0 30px;
 
     width: 100%;
     height: calc(100% + 40px);
+    height: 430px;
 }
 .divisor {
     position: relative;
@@ -26,35 +27,45 @@
 
 .scrollBarContainer {
     display: flex;
-    gap: 10px;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    width: 100%;
-    padding: 0 30px;
+    padding: 030px;
 
-    .scrollBar {
-        width: clamp(250px, 100%, 500px);
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        // background-color: #ccc;
-
-        input {
-            width: 100%;
-        }
-        .scrolBarThumb {
-            position: absolute;
-            left: 0;
-            height: 30px;
-            width: 30px;
-            border: 2px solid #000;
-            border-color: transparent #000 transparent #000;
-        }
-    }
     .scrollBarArrows {
         font-size: 45px;
+    }
+    .scrollBarActionContainer {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        width: clamp(250px, 100%, 500px);
+
+        .scrollBar {
+            width: clamp(250px, 100%, 500px);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 5px;
+            background-color: #ccc;
+
+            input {
+                width: 100%;
+                opacity: 0;
+            }
+            .scrolBarThumb {
+                position: absolute;
+                left: 10%;
+                height: 30px;
+                width: 0px;
+                border: 2px solid #000;
+                border-color: transparent #000 transparent #000;
+                pointer-events: none;
+                transform: translate(-50%, 0);
+
+                transition: left 300ms ease-out;
+            }
+        }
     }
 }
