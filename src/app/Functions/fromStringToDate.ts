@@ -8,10 +8,11 @@ const refMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep'
 
 const dateCleanupArraying = (dateStr: string): string[] => {
     return dateStr
-        .replaceAll(',', '')
+        .replaceAll(',', ' ')
         .replaceAll(' am', 'am')
         .replaceAll(' pm', 'pm')
         .replaceAll('-', ' ')
+        .replaceAll('/', ' ')
         .split(' ')
         .filter(data => data !== '')
         .filter(data => !refDays.some(day => data.toLowerCase().includes(day)));
@@ -125,4 +126,17 @@ export const fromStringToDate = (dateStr: string): DateObject => {
     else endDate = undefined;
 
     return {startDate: date, endDate: endDate, startTime, endTime};
+};
+
+// ------------------------------------------------------ //
+// ------------------------------------------------------ //
+// ------------------------------------------------------ //
+
+// ------------------ FROM 24 TO AM/PM ------------------ //
+
+export const from24ToAmPm = (time: number): string => {
+    if (time === 12) return '12 pm';
+    if (time === 24) return '12 am';
+    if (time < 12) return `${time} am`;
+    return `${time - 12} pm`;
 };
